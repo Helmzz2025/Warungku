@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WarungKu - Belanja Murah & Lengkap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background-color: #ee4d2d; /* Mirip warna Shopee */
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-left: 25px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: #ffd1d1;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background-color: #fff;
+            padding: 50px 0;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .hero-section h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: #ee4d2d;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 2px solid #ee4d2d;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .search-bar input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .search-bar button {
+            background-color: #ee4d2d;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #d84315;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            padding: 40px 0;
+        }
+
+        .product-grid h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 30px;
+            color: #333;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            /* Placeholder for image - you'll replace this with actual product images */
+            min-height: 200px; /* To ensure consistent height for placeholders */
+            object-fit: cover;
+        }
+
+        .product-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .product-card .price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ee4d2d;
+            margin-bottom: 15px;
+        }
+
+        .btn-buy {
+            background-color: #28a745; /* Green for buy button */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-buy:hover {
+            background-color: #218838;
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            font-size: 30px;
+            color: #333;
+        }
+
+        /* Order Status & Payment Methods */
+        .order-status-info, .payment-methods {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .order-status-info p, .payment-methods p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .order-status-info a {
+            color: #ee4d2d;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .order-status-info a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-order-check {
+            background-color: #007bff; /* Blue for check order button */
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 17px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-order-check:hover {
+            background-color: #0056b3;
+        }
+
+        .payment-methods ul {
+            list-style: none;
+            padding: 0;
+            font-size: 17px;
+        }
+
+        .payment-methods ul li {
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">WarungKu</div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#">Beranda</a></li>
+                    <li><a href="#">Kategori</a></li>
+                    <li><a href="#">Promo</a></li>
+                    <li><a href="#" id="cart-link"><i class="fas fa-shopping-cart"></i> Keranjang (<span id="cart-count">0</span>)</a></li>
+                    <li><a href="#"><i class="fas fa-user"></i> Akun Saya</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero-section">
+        <div class="container">
+            <h1>Selamat Datang di WarungKu!</h1>
+            <p>Temukan berbagai kebutuhanmu dengan harga terbaik.</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Cari produk di WarungKu...">
+                <button><i class="fas fa-search"></i> Cari</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="container product-grid">
+        <h2>Produk Unggulan</h2>
+        <div class="products" id="product-list">
+            </div>
+
+        <h2 class="section-title">Status Pesanan</h2>
+        <div class="order-status-info">
+            <p>Untuk melihat status pesanan Anda, silakan <a href="#">masuk ke akun Anda</a> atau hubungi layanan pelanggan.</p>
+            <button class="btn-order-check">Cek Pesanan Anda</button>
+        </div>
+
+        <h2 class="section-title">Metode Pembayaran</h2>
+        <div class="payment-methods">
+            <p>Kami menerima berbagai metode pembayaran:</p>
+            <ul>
+                <li>Transfer Bank (BCA, Mandiri, BRI)</li>
+                <li>E-Wallet (OVO, GoPay, Dana)</li>
+                <li>Kartu Kredit/Debit</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 WarungKu. Semua Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data contoh produk
+        const products = [
+            { id: 1, name: "Mie Instan Jumbo", price: 3500, image: "https://via.placeholder.com/200x200?text=Mie+Instan" },
+            { id: 2, name: "Sabun Cuci Piring", price: 12000, image: "https://via.placeholder.com/200x200?text=Sabun+Cuci" },
+            { id: 3, name: "Kopi Hitam Bubuk", price: 18000, image: "https://via.placeholder.com/200x200?text=Kopi+Bubuk" },
+            { id: 4, name: "Gula Pasir 1 Kg", price: 15500, image: "https://via.placeholder.com/200x200?text=Gula+Pasir" },
+            { id: 5, name: "Minyak Goreng 2L", price: 32000, image: "https://via.placeholder.com/200x200?text=Minyak+Goreng" },
+            { id: 6, name: "Teh Celup Kotak", price: 8500, image: "https://via.placeholder.com/200x200?text=Teh+Celup" },
+        ];
+
+        let cart = []; // Keranjang belanja
+
+        // Fungsi untuk menampilkan produk
+        function displayProducts() {
+            const productListDiv = document.getElementById('product-list');
+            productListDiv.innerHTML = ''; // Bersihkan dulu
+
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('product-card');
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p class="price">Rp ${product.price.toLocaleString('id-ID')}</p>
+                    <button class="btn-buy" data-id="${product.id}">Tambahkan ke Keranjang</button>
+                `;
+                productListDiv.appendChild(productCard);
+            });
+
+            // Tambahkan event listener ke tombol "Tambahkan ke Keranjang"
+            document.querySelectorAll('.btn-buy').forEach(button => {
+                button.addEventListener('click', addToCart);
+            });
+        }
+
+        // Fungsi untuk menambahkan produk ke keranjang
+        function addToCart(event) {
+            const productId = parseInt(event.target.dataset.id);
+            const product = products.find(p => p.id === productId);
+
+            if (product) {
+                const existingItem = cart.find(item => item.id === productId);
+                if (existingItem) {
+                    existingItem.qty++;
+                } else {
+                    cart.push({ ...product, qty: 1 });
+                }
+                updateCartCount();
+                alert(`${product.name} telah ditambahkan ke keranjang!`);
+            }
+        }
+
+        // Fungsi untuk mengupdate jumlah item di ikon keranjang
+        function updateCartCount() {
+            const cartCountElement = document.getElementById('cart-count');
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            cartCountElement.textContent = totalItems;
+        }
+
+        // --- Fungsionalitas Checkout (Sederhana untuk ilustrasi) ---
+        // Ini adalah simulasi, belum terhubung ke backend atau pembayaran nyata
+        const cartLink = document.getElementById('cart-link');
+        cartLink.addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert('Keranjang Anda kosong. Silakan tambahkan produk terlebih dahulu!');
+                return;
+            }
+
+            let orderSummary = "Detail Pesanan Anda:\n\n";
+            let totalOrder = 0;
+            cart.forEach(item => {
+                orderSummary += `${item.name} (Qty: ${item.qty}) - Rp ${item.price.toLocaleString('id-ID')} per item\n`;
+                totalOrder += item.price * item.qty;
+            });
+            orderSummary += `\nTotal: Rp ${totalOrder.toLocaleString('id-ID')}`;
+
+            const customerName = prompt("Nama Anda:");
+            const customerEmail = prompt("Email Anda (untuk notifikasi):");
+            const customerAddress = prompt("Alamat Pengiriman Lengkap:");
+            const customerPhone = prompt("Nomor Telepon:");
+
+            if (customerName && customerEmail && customerAddress && customerPhone) {
+                const confirmOrder = confirm(`${orderSummary}\n\nLanjutkan dengan pemesanan?\nNama: ${customerName}\nEmail: ${customerEmail}\nAlamat: ${customerAddress}\nTelp: ${customerPhone}`);
+                
+                if (confirmOrder) {
+                    // Di sini Anda akan mengirim data pesanan ke backend
+                    // Untuk demo ini, kita hanya akan log ke console dan reset keranjang
+                    console.log("Pesanan Dikirim:", {
+                        customer_name: customerName,
+                        customer_email: customerEmail,
+                        customer_address: customerAddress,
+                        customer_phone: customerPhone,
+                        products: cart,
+                        total: totalOrder,
+                        timestamp: new Date().toISOString()
+                    });
+                    
+                    // --- SIMULASI PENGIRIMAN DATA KE BACKEND PYTHON (TIDAK BERFUNGSI TANPA BACKEND NYATA) ---
+                    // Ini adalah bagaimana Anda akan mengirim data menggunakan fetch API
+                    // ke backend Python yang telah saya berikan contohnya sebelumnya.
+                    // Anda perlu mengganti URL 'http://127.0.0.1:5000/place_order'
+                    // dengan URL backend Anda saat sudah di-deploy.
+                    /*
+                    fetch('http://127.0.0.1:5000/place_order', { // Ganti dengan URL backend Anda
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            customer_name: customerName,
+                            customer_email: customerEmail,
+                            products: cart.map(item => ({
+                                name: item.name,
+                                qty: item.qty,
+                                price: item.price
+                            })),
+                            total: totalOrder
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            alert('Pesanan Anda berhasil ditempatkan! Cek email Anda untuk konfirmasi.');
+                            cart = []; // Kosongkan keranjang
+                            updateCartCount();
+                        } else {
+                            alert('Terjadi kesalahan saat menempatkan pesanan: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Terjadi kesalahan jaringan atau server. Silakan coba lagi.');
+                    });
+                    */
+                    // Karena ini tanpa backend, kita langsung beri alert sukses
+                    alert('Pesanan Anda berhasil ditempatkan! Tim WarungKu akan segera menghubungi Anda.');
+                    cart = []; // Kosongkan keranjang
+                    updateCartCount();
+                } else {
+                    alert('Pemesanan dibatalkan.');
+                }
+            } else {
+                alert('Pemesanan dibatalkan. Harap lengkapi semua informasi.');
+            }
+        });
+
+        // Jalankan fungsi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            displayProducts();
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>
